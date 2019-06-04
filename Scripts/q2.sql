@@ -1,0 +1,14 @@
+invalidate metadata;
+
+select  game.id 'GameNumber', count(distinct user_id) UserCount from tweets_consolidated join game
+
+where 
+
+(tweets_consolidated.created between game.officialstart and game.officialend) 
+
+and 
+
+(tweets_consolidated.hashtag_id = game.fc1 or tweets_consolidated.hashtag_id = game.fc2) 
+
+group by game.id order by UserCount desc limit 10;
+
